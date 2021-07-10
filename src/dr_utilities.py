@@ -323,11 +323,11 @@ def mlx5_ifc_encap_decap(bin_str):
     ret["flag"] = (bin_str[length + VXLAN_HDR_LEN - 16 : length + VXLAN_HDR_LEN - 8])
     ret["vni"] = int(bin_str[length + VXLAN_HDR_LEN - 8 : length + VXLAN_HDR_LEN-2], 16)
     if has_vlan:
-        str = "vxlan en/decap tnl_push(dmac=%s, smac=%s, vid=%s, sip=%s, dip=%s, port=%s, vni=%s)" % \
+        str = "vxlan tnl_push(dmac=%s, smac=%s, vid=%s, sip=%s, dip=%s, port=%s, vni=%s)" % \
                            (ret["dmac"], ret["smac"], ret["vid"], ret["src_ip"], ret["dst_ip"],
                            ret["udp_port"], ret["vni"])
     else:
-        str = "vxlan en/decap tnl_push(dmac=%s, smac=%s, vlan null, sip=%s, dip=%s, port=%s, vni=%s)" % \
+        str = "vxlan tnl_push(dmac=%s, smac=%s, vlan null, sip=%s, dip=%s, port=%s, vni=%s)" % \
                            (ret["dmac"], ret["smac"], ret["src_ip"], ret["dst_ip"],
                            ret["udp_port"], ret["vni"])
     return str
