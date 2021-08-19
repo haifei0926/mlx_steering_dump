@@ -261,23 +261,16 @@ def parse_domain(csv_reader, domain_obj=None):
             dump_ctx.domain.add_send_ring(dr_obj)
 
         elif dr_rec_type == DR_DUMP_REC_TYPE_PMD_PKT_REFORMAT:
-            if dr_obj.id in dump_ctx.encap_decap.keys():
-                dump_ctx.encap_decap[dr_obj.id] += dr_obj.data
-            else:
+            if dr_obj.id and dr_obj.data:
                 dump_ctx.encap_decap[dr_obj.id] = dr_obj.data
 
         elif dr_rec_type == DR_DUMP_REC_TYPE_PMD_COUNTER:
-            if dr_obj.id in dump_ctx.counter.keys():
-                dump_ctx.counter[dr_obj.id] += dr_obj.data
-            else:
+            if dr_obj.id and dr_obj.data:
                 dump_ctx.counter[dr_obj.id] = dr_obj.data
 
         elif dr_rec_type == DR_DUMP_REC_TYPE_PMD_MODIFY_HDR:
             if dr_obj.id and dr_obj.data:
-                if (dr_obj.id in dump_ctx.modify_hdr.keys()):
-                    dump_ctx.modify_hdr[dr_obj.id] += dr_obj.data
-                else:
-                    dump_ctx.modify_hdr[dr_obj.id] = dr_obj.data
+                dump_ctx.modify_hdr[dr_obj.id] = dr_obj.data
 
     return dump_ctx, LAST_OBJ
 
